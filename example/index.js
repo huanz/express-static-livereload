@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(reload({
     server: server,
-    path: 'public'
+    path: ['public', 'views']
 }));
 
 var users = [

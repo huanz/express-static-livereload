@@ -1,6 +1,6 @@
 {
   "name": "express-static-livereload",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a express middleware to livereload static files",
   "main": "index.js",
   "scripts": {

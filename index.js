@@ -65,13 +65,12 @@ function injectSnap(regex, html, snippet) {
 
 var defaluts = {
     path: 'public',
-    port: 35729,
     match: /<body[^>]*>/i,
     filter: function(filename) {
         return !/node_modules/.test(filename);
     },
     delay: 1000,
-    clientConsole: false
+    console: false
 };
 
 module.exports = function(opt) {
@@ -83,7 +82,7 @@ module.exports = function(opt) {
         };
     }
     var snippet = '<script id="__ds_socket__" src="/socket.io/socket.io.js"></script>';
-    if (config.clientConsole) {
+    if (config.console) {
         snippet += '<script src="/__ds/__ds_livereload_console.js"></script>';
     } else {
         snippet += '<script async src="/__ds/__ds_livereload.js"></script>';
@@ -92,7 +91,7 @@ module.exports = function(opt) {
 
     io.on('connection', function(socket) {
         log('Livereload client connected');
-        if (config.clientConsole) {
+        if (config.console) {
             socket.on('console:log', function(args) {
                 args.unshift(chalk.green('LOG'));
                 log.apply(null, args);
@@ -115,7 +114,7 @@ module.exports = function(opt) {
     // 监听文件变化，reload
     var changedQueue = {};
     var boardcastChange = function(filename) {
-        log('change: ' + chalk.yellow(path.relative(config.path, filename)));
+        log('change: ' + chalk.yellow(filename));
         io.emit('file:change', {
             path: filename,
             name: path.basename(filename),
@@ -146,7 +145,7 @@ module.exports = function(opt) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         if (req.url.indexOf('/__ds/__ds_livereload') !== -1) {
-            res.sendfile(__dirname + '/lib/__ds_livereload' + (config.clientConsole ? '_console.js' : '.js'));
+            res.sendfile(__dirname + '/lib/__ds_livereload' + (config.console ? '_console.js' : '.js'));
         } else if (res.injected || !isHtml(req) || isIgnore(req.url)) {
             return next();
         } else {
