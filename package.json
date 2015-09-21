@@ -1,0 +1,33 @@
+{
+  "name": "express-static-livereload",
+  "version": "1.0.0",
+  "description": "a express middleware to livereload static files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huanz/express-static-livereload.git"
+  },
+  "keywords": [
+    "express",
+    "livereload",
+    "static"
+  ],
+  "author": "bukas (https://github.com/huanz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huanz/express-static-livereload/issues"
+  },
+  "homepage": "https://github.com/huanz/express-static-livereload#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "node-watch": "^0.3.4",
+    "socket.io": "^1.3.7"
+  },
+  "devDependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3"
+  }
+}
